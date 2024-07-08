@@ -6,12 +6,15 @@ namespace TirelireWebApp.Controllers
 {
 	public class HomeController : Controller
 	{
+		//ILogger : journal pour enregistrer les infos important de l'app
 		private readonly ILogger<HomeController> _logger;
-
 		public HomeController(ILogger<HomeController> logger)
 		{
 			_logger = logger;
 		}
+
+
+
 
 		public IActionResult Index()
 		{
@@ -19,6 +22,15 @@ namespace TirelireWebApp.Controllers
 		}
 
 		public IActionResult Privacy()
+		{
+			return View();
+		}
+		
+		public IActionResult Client()
+		{
+			return View();
+		}
+		public IActionResult Admin()
 		{
 			return View();
 		}

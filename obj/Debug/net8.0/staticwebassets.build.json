@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "80+7wCKX5/XIRgTLCDqj+g+8k/SVffVvhzW/mD2lYZA=",
+  "Hash": "6x63E7Ajp4pwO1AHN0q007DGCvhS+IekXRxsT1EfBwU=",
   "Source": "TirelireWebApp",
   "BasePath": "_content/TirelireWebApp",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\css\\style.css",
+      "SourceId": "TirelireWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\",
+      "BasePath": "_content/TirelireWebApp",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style.css"
     },
     {
       "Identity": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\favicon.ico",
