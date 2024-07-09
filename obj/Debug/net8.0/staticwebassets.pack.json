@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\TirelireWebApp.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\Logo.png",
+      "PackagePath": "staticwebassets\\Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\Logo2.png",
+      "PackagePath": "staticwebassets\\Logo2.png"
+    },
+    {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\Logo4.png",
+      "PackagePath": "staticwebassets\\Logo4.png"
+    },
+    {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\Logo5.png",
+      "PackagePath": "staticwebassets\\Logo5.png"
+    },
+    {
       "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -247,6 +263,10 @@
     {
       "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\logo3.png",
+      "PackagePath": "staticwebassets\\logo3.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TirelireWebApp.Microsoft.AspNetCore.StaticWebAssets.props",

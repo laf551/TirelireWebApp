@@ -1,4 +1,73 @@
 ﻿body {
     font-family: "Sofia", sans-serif;
     font-size: 20px;
+    margin-bottom: 60px;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+
+
+.rowBorder {
+    color: #228b79;
+    border-block: solid 10px;
+    padding: 20px;
+    display: flex;
+   
+    align-items: center;
+    gap: 20px;
+   
+}
+.bb {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 20px;
+    margin : 9px ; 
+    width : 30%; 
+    max-height : 30%; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.colonne {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.text-block {
+    margin-top: 0;
+}
+.ici {
+    margin-left: 112px ; 
+}
+.Droite {
+    text-align: center; 
+    display: inline-block;
+    background-color: whitesmoke;
+    padding: 20px;
+    height: auto;
+    list-style-type: none; /* Retire les puces */
+    padding: 0;
+    margin: 0;
+}
+.ab {
+    display: inline-block;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: yellowgreen;
+    color: white; 
 }

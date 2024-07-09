@@ -1,0 +1,153 @@
+﻿@model TirelireWebApp.Models.Tirelire
+@{
+    ViewData["Title"] = "Details"; 
+}
+<div class="container text-center ">
+    <div class="row">
+        <div class="col bb ">
+            <div class="row">
+                <div class="d-flex justify-content-center text-block test ">
+                    <img src="@Model.ImageUrlTirelire"
+                         style="width:30% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  cursor:pointer;"
+                         id="productImage" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" />
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">@Model.NameTirelire</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="@Model.ImageUrlTirelire"
+                                         style="width:100% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                <div class="d-flex justify-content-center text-block">
+                    <h4 style=" color : yellowgreen ; margin: 5px ;"> @Model.NameTirelire </h4>
+                </div>
+                <div class="d-flex justify-content-center text-block" style=" color : yellowgreen">
+                    @Model.PriceTirelire.ToString("N2") € <!--0.00-->
+                </div>
+                </br>
+                <div class="d-flex justify-content-center">
+
+                    Détails :
+
+                    <ul style=" list-style-type: none ; text-align : left">
+                        @foreach (var item in Model.DescriptionTirelire)
+                        {
+                            <li>Hauteur : @item.Detail.Hauteur cm</li>
+                            <li>Largeur : @item.Detail.Largeur cm</li>
+                            <li>Longueur : @item.Detail.Longeur cm</li>
+                            <li>Poids : @item.Detail.Poids cm</li>
+                            <li> Capacité : @item.Detail.Capacité  </li>
+                            <li> Couleur Principale : @Model.Couleur </li>
+                            <li>Fabricant :  @item.Detail.Fabricant </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+            <div class="row">
+                <!-- Galerie pour les même couleurs-->
+                <div class="col">1</div>
+                <div class="col">2</div>
+                <div class="col">3</div>
+                <div class="col">4</div>
+            </div>
+        </div>
+        <div class="col">
+            
+        </div>
+       @*  <div class="col">
+
+            <div class="">
+                <div class="d-flex justify-content-center text-block test ">
+                    <img src="@Model.ImageUrlTirelire"
+                    style="width:30% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  cursor:pointer;" 
+                    id="productImage" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">@Model.NameTirelire</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="@Model.ImageUrlTirelire"
+                                         style="width:100% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div> 
+                
+
+                </div>
+                </br>
+                <div class="d-flex justify-content-center text-block">
+                    <h4 style=" color : yellowgreen ; margin: 5px ;"> @Model.NameTirelire </h4>
+                </div>
+                <div class="d-flex justify-content-center text-block" style=" color : yellowgreen">
+                    @Model.PriceTirelire.ToString("N2") € <!--0.00-->
+                </div>
+                <div class="d-flex justify-content-center">
+                    Détails :
+                    <ul>
+                        @foreach (var item in Model.DescriptionTirelire)
+                        {
+                            <li>Hauteur : @item.Detail.Hauteur cm</li>
+                            <li>Largeur : @item.Detail.Largeur cm</li>
+                            <li>Longueur : @item.Detail.Longeur cm</li>
+                            <li>Poids : @item.Detail.Poids cm</li>
+                            <li> Capacité : @item.Detail.Capacité  </li>
+                            <li> Couleur Principale : @item.Detail.CouleurPrincipale </li>
+                            <li>Fabricant :  @item.Detail.Fabricant </li>
+                        }
+                    </ul>
+
+                </div>
+
+            </div>
+        <!--button add tirelire dans le panier
+        <div class="mt-3 justify-content-center">
+            <button type="button" class="btn  btn-circle" id="addProductBtn"
+                    asp-controller="Home" asp-action="Index" asp-route-id="">
+                +
+            </button>
+
+        </div>
+        -->
+    </div>
+        <div class="col Droite">
+            Bienvenue ici
+        </div> *@
+
+   
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script>
+    $('.table #photoButton').on('click', function (event) {
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $('#photoModal #patientPhoto').attr('src', href);
+        $('#photoModal').modal('show');
+    });
+</script>
+       
+
+
+
+

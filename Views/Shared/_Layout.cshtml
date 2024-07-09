@@ -15,15 +15,42 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid ">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TirelireWebApp</a>
+                <ul class="navbar-nav  ici flex-grow-1" style="font-size : larger">
+                    <li class="nav-item">
+                        <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index" style="font-size : larger"><img src="~/Logo5.png" alt="Logo" style="height: 50px; max-width: 100%; object-fit: contain;" /></a>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="text-center" style="margin: 20px">TirelireWebApp</h3>
+                    </li>
+
+                   
+                </ul>
+                <!-- rechercher -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item " style=" margin: auto ; ">
+                            <form asp-controller="Home" asp-action="Index" method="get">
+                                <input style="width: 80% ; float : left ;  border-top-left-radius : 20px; border-radius:20px ;
+                                    background : transparent" type="text" name="SearchString" class="form-control" />
+                                <button style=" width : 20% ; float: left ; border : none ; background : transparent ; height : 40px"
+                                        type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1  ">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> <span class="fa fa-home"></span></a>
+                <div >
+                    <!-- <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> -->
+                    <ul class="navbar-nav flex-grow-1 " style="float : right; font-size : larger">
+                        
+                        <li class="nav-item" >
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" > <span class="fa fa-home"></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -39,11 +66,11 @@
                         </li>
                         <!-- Mod Menu-->
                         <li class="nav-item">
-                            <a class="nav-link text-dark">Mod</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Details">Moderateur</a>
                         </li>
                         <!-- Assist Menu-->
                         <li class="nav-item">
-                            <a class="nav-link text-dark">Assist</a>
+                            <a class="nav-link text-dark" asp-area=" " asp-controller=" Home" asp-action="Details" >Assistant</a>
                         </li>
                     </ul>
                 </div>
@@ -57,13 +84,19 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="text-center">
             &copy; 2024 - TirelireWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/myScript.js" asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

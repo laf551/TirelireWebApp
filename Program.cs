@@ -1,9 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using TirelireWebApp.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//SQLServer
+builder.Services.AddDbContext<TirelireContext>(Options =>
+	Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionStringDataTirelire"))); 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,7 +30,10 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+    
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 
 app.Run();

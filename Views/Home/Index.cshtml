@@ -1,8 +1,35 @@
-﻿@{
+﻿@model List<TirelireWebApp.Models.Tirelire>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome ! </h1>
+    
+</div>
+<div class="container  ">
+
+    <div class="row ">
+        @foreach(var i in Model)
+        {
+            <div class="col-6 bb">
+
+
+                <div class="d-flex justify-content-center text-block">
+                    <img src="@i.ImageUrlTirelire" style="width:70%  ; height : 40% ;  border: solid 7px lightgrey" />
+                </div>
+                <div class="d-flex justify-content-center text-block">
+                    <h4 style=" color : yellowgreen ; margin: 5px ;"> @i.NameTirelire </h4>
+                </div>
+                <div class="d-flex justify-content-center text-block" style=" color : yellowgreen">
+                    @i.PriceTirelire.ToString("N2") € <!--0.00-->
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <a style="background-color: forestgreen ; color : white ; margin-bottom: 30px" class="btn btn-info" asp-controller="Home" asp-action="Details" asp-route-id="@i.Id"> Détails </a>
+                </div>
+            </div>
+        }
+    </div>
 </div>

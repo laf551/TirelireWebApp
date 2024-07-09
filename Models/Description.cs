@@ -1,12 +1,14 @@
 ﻿namespace TirelireWebApp.Models
 {
-    public class TirelireDescription
+    public class Description
     {
         public int IdTirelire { get; set; }
         public Tirelire Tirelire { get; set; }
+        public int IdDetail { get; set; }
+        public DetailTirelire Detail { get; set; }
 
-        public DetailTirelire Description { get; set; }
+        
 
-        public int IdDescript { get; set; }
+
     }
 }
