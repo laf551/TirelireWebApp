@@ -17,7 +17,7 @@
 
 
                 <div class="d-flex justify-content-center text-block">
-                    <img src="@i.ImageUrlTirelire" style="width:70%  ; height : 40% ;  border: solid 7px lightgrey" />
+                    <img src="@i.ImageUrlTirelire" style="width:70%  ; height : 40% ; min-height: 50%;  border: solid 7px lightgrey" />
                 </div>
                 <div class="d-flex justify-content-center text-block">
                     <h4 style=" color : yellowgreen ; margin: 5px ;"> @i.NameTirelire </h4>
@@ -27,7 +27,8 @@
                 </div>
                 <br>
                 <div class="d-flex justify-content-center">
-                    <a style="background-color: forestgreen ; color : white ; margin-bottom: 30px" class="btn btn-info" asp-controller="Home" asp-action="Details" asp-route-id="@i.Id"> Détails </a>
+                    <a style="background-color: forestgreen ; color : white ; margin-bottom: 30px" 
+                    class="btn btn-info" asp-controller="Home" asp-action="Details" asp-route-id="@i.Id"> Détails </a>
                 </div>
             </div>
         }

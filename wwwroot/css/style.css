@@ -46,10 +46,10 @@
     text-align: center; 
     display: inline-block;
     background-color: whitesmoke;
-    padding: 20px;
+    
     height: auto;
     list-style-type: none; /* Retire les puces */
-    padding: 0;
+    padding-top: 10px;
     margin: 0;
 }
 .ab {

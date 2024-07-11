@@ -1,8 +1,17 @@
+using Azure.Core;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using TirelireWebApp.Data;
 using TirelireWebApp.Models;
+using TirelireWebApp.Models.Panier;
+
+
+
+
 
 
 
@@ -27,7 +36,6 @@ namespace TirelireWebApp.Controllers
                             select d;
             if (!string.IsNullOrEmpty(SearchString))
             {
-                
                 recherche = recherche.Where(d => d.NameTirelire.Contains(SearchString));
                 return View(await recherche.ToListAsync());
             }
@@ -35,48 +43,124 @@ namespace TirelireWebApp.Controllers
 			return View(await recherche.ToListAsync()); 
         }
 
-        /*public IActionResult Index()
-        {
-            return View();
-        }*/
-       /* public async Task<IActionResult> Details(int? IdBtnTirelire)
-        {
-            var rqt = await _context.TirelireSet
-                .Include(d => d.DescriptionTirelire)//chargé avec tirelire
-                .ThenInclude(i => i.Detail) //inclus sous-niveaux
-                .FirstOrDefaultAsync(t => t.Id == IdBtnTirelire); //rqt LINQ: FirstOrDefaultAsync pour recup un elt unique du BD 
+        //DeTAILS OK 
+        /* public async Task<IActionResult> Details(int? id)
+         {
+             // Injecter dans le cookie un panier vide par défaut dans la page
+             CookiePanier panier = new CookiePanier();
+             string panierJson = JsonSerializer.Serialize(panier);
 
-            if (rqt == null)
-            {
-                return NotFound();
-            }
+             Response.Cookies.Append("panier", panierJson);
 
-            return View(rqt);
-        }*/
+             // Récupérer le premier élément d'une collection et faire null si aucun ne correspond aux conditions
+             var tirelire = await _context.TirelireSet
+                 .Include(t => t.DescriptionTirelire)
+                 .ThenInclude(d => d.Detail)
+                 .FirstOrDefaultAsync(t => t.Id == id);
+
+             if (tirelire == null)
+             {
+                 return NotFound();
+             }
+
+             // Récupérer les URLs des images des tirelires de couleur rouge
+             var imagesCouleur = await _context.TirelireSet
+                 .Where(t => t.Couleur == tirelire.Couleur)
+                 .Select(t => t.ImageUrlTirelire)
+                 .ToListAsync();
+
+             // Utiliser ViewBag pour passer les données des images de couleur à la vue
+             ViewBag.ImagesCouleur = imagesCouleur;
+
+
+             ViewBag.Panier = panier;
+
+             // Retourner la vue avec le modèle de la tirelire
+             return View(tirelire);
+         }*/
+
+
 
         public async Task<IActionResult> Details(int? id)
-
         {
-            //récupérer le premier élément d'une collection faire  null si aucun ne correspond au condition
-            var dish = await _context.TirelireSet
-                 .Include(di => di.DescriptionTirelire)
-                 .ThenInclude(i => i.Detail)
-                 .FirstOrDefaultAsync(x => x.Id == id);
-            //awiat : elle permet d'exécuter cette opération de manière asynchrone, libérant ainsi le thread d'appel
-            //pour d'autres tâches pendant l'attente de la réponse de la base de données.
-            if (dish == null)
+            // Injecter dans le cookie un panier vide par défaut dans la page
+
+
+            // Récupérer le premier élément d'une collection et faire null si aucun ne correspond aux conditions
+            var tirelire = await _context.TirelireSet
+                .Include(t => t.DescriptionTirelire)
+                .ThenInclude(d => d.Detail)
+                .FirstOrDefaultAsync(t => t.Id == id); 
+                
+
+            if (tirelire == null)
             {
                 return NotFound();
             }
-            return View(dish);
+
+            // Récupérer les URLs des images des tirelires de couleur rouge
+            var imagesCouleur = await _context.TirelireSet
+                .Where(t => t.Couleur == tirelire.Couleur)
+                .Select(t => t.ImageUrlTirelire)
+                .ToListAsync();
+
+            // Utiliser ViewBag pour passer les données des images de couleur à la vue
+            ViewBag.ImagesCouleur = imagesCouleur;
+            ViewBag.TirelireData = tirelire ;
+            ViewBag.IdDuPanierAjouter = id; 
+
+            //var panierView = await CreatePanier();
+            /* LignePanier pann = new LignePanier();
+             pann.Add(tirelire);*/
+           
+
+            //return new JsonResult(p);
+
+            return View(tirelire); 
         }
 
 
-        /*public IActionResult Details()
-		{
-			return View();
-		}*/
+       
 
+
+        [HttpPost]
+        public ActionResult CreateCheckout(int ? Id)
+        {
+            
+            /*List<PanierItem> p = new List<PanierItem>
+            {
+                new PanierItem
+                {
+                   Id = 1,
+                   Quantite = 2,
+                   Frais = 3
+                }
+            };*/
+            List<PanierItem> p = new List<PanierItem>
+            {
+                new PanierItem  {
+                   Id = 1,
+                   Quantite = 2,
+                   Frais = 3  } };
+            
+            if (p == null)
+            {
+                return NotFound();
+            };
+
+            
+            //return new JsonResult(p);
+            //*var recherche = from d in _context.TirelireSet
+                            //select d;
+           
+            
+            return View(p);
+
+
+
+
+
+        }
         public IActionResult Admin()
 		{
 			return View();

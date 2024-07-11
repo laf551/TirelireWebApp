@@ -21,7 +21,7 @@ namespace TirelireController.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> De( int ? IdBtnTirelire)
+       /* public async Task<IActionResult> De( int ? IdBtnTirelire)
         {
             var rqt = await _context.TirelireSet
                 .Include(d => d.DescriptionTirelire)//chargé avec tirelire
@@ -40,7 +40,7 @@ namespace TirelireController.Controllers
         {
             var tirelireView = await _context.TirelireSet.ToListAsync();
             return View(tirelireView);
-        }
+        }*/
 
 
 
