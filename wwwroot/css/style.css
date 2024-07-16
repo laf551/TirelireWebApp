@@ -46,7 +46,7 @@
     text-align: center; 
     display: inline-block;
     background-color: whitesmoke;
-    
+    width : 950px; 
     height: auto;
     list-style-type: none; /* Retire les puces */
     padding-top: 10px;

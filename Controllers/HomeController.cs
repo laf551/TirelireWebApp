@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using TirelireWebApp.Data;
 using TirelireWebApp.Models;
 using TirelireWebApp.Models.Panier;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -31,7 +32,7 @@ namespace TirelireWebApp.Controllers
 		}
 
         public async Task<IActionResult> Index(string SearchString)
-        {
+        { 
             var recherche = from d in _context.TirelireSet
                             select d;
             if (!string.IsNullOrEmpty(SearchString))
@@ -43,44 +44,10 @@ namespace TirelireWebApp.Controllers
 			return View(await recherche.ToListAsync()); 
         }
 
-        //DeTAILS OK 
-        /* public async Task<IActionResult> Details(int? id)
-         {
-             // Injecter dans le cookie un panier vide par défaut dans la page
-             CookiePanier panier = new CookiePanier();
-             string panierJson = JsonSerializer.Serialize(panier);
-
-             Response.Cookies.Append("panier", panierJson);
-
-             // Récupérer le premier élément d'une collection et faire null si aucun ne correspond aux conditions
-             var tirelire = await _context.TirelireSet
-                 .Include(t => t.DescriptionTirelire)
-                 .ThenInclude(d => d.Detail)
-                 .FirstOrDefaultAsync(t => t.Id == id);
-
-             if (tirelire == null)
-             {
-                 return NotFound();
-             }
-
-             // Récupérer les URLs des images des tirelires de couleur rouge
-             var imagesCouleur = await _context.TirelireSet
-                 .Where(t => t.Couleur == tirelire.Couleur)
-                 .Select(t => t.ImageUrlTirelire)
-                 .ToListAsync();
-
-             // Utiliser ViewBag pour passer les données des images de couleur à la vue
-             ViewBag.ImagesCouleur = imagesCouleur;
 
 
-             ViewBag.Panier = panier;
-
-             // Retourner la vue avec le modèle de la tirelire
-             return View(tirelire);
-         }*/
-
-
-
+        [HttpGet]
+       // [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             // Injecter dans le cookie un panier vide par défaut dans la page
@@ -104,63 +71,82 @@ namespace TirelireWebApp.Controllers
                 .Select(t => t.ImageUrlTirelire)
                 .ToListAsync();
 
-            // Utiliser ViewBag pour passer les données des images de couleur à la vue
+            // passe les données des images de couleur à la vue
             ViewBag.ImagesCouleur = imagesCouleur;
-            ViewBag.TirelireData = tirelire ;
-            ViewBag.IdDuPanierAjouter = id; 
 
-            //var panierView = await CreatePanier();
+
+            var getIdDetails = await _context.DescriptionSet
+                .Where(i => i.IdTirelire == id)
+                .Select(i => i.IdDetail)
+                .ToListAsync();
+
+            //vérification si l'ID existe dans la liste des ID récupérés
+            var ContenuDetail = await (from d in _context.DetailTireliresSet
+                                       where getIdDetails.Contains(d.Id)
+                                       select d).ToListAsync();
+            // Si vous avez plusieurs détails, choisissez-en un, par exemple le premier
+            var detail = ContenuDetail.FirstOrDefault();
+            //modif 
+            /* var modelview = new List<PanierItem>();
+            // ViewBag.PanierView = modelview;*//*
+            if (modelview != null)
+            {
+                // Rediriger vers une action dans un autre contrôleur
+                return RedirectToAction("CreateCheckout", "Panier");
+            }*
+
+            /var panierView = await CreatePanier();
             /* LignePanier pann = new LignePanier();
              pann.Add(tirelire);*/
-           
+
 
             //return new JsonResult(p);
-
-            return View(tirelire); 
-        }
-
-
-       
-
-
-        [HttpPost]
-        public ActionResult CreateCheckout(int ? Id)
-        {
-            
-            /*List<PanierItem> p = new List<PanierItem>
+            List<PanierItem> MaListe = new List<PanierItem>
             {
-                new PanierItem
-                {
-                   Id = 1,
-                   Quantite = 2,
-                   Frais = 3
-                }
-            };*/
-            List<PanierItem> p = new List<PanierItem>
+
+            };
+            PanierItem pan = new()
             {
-                new PanierItem  {
-                   Id = 1,
-                   Quantite = 2,
-                   Frais = 3  } };
-            
-            if (p == null)
-            {
-                return NotFound();
+                t = tirelire,
+                Count = 0,
+                IdTirelire = tirelire.Id,
+                d = detail
+
+
             };
 
-            
-            //return new JsonResult(p);
-            //*var recherche = from d in _context.TirelireSet
-                            //select d;
-           
-            
-            return View(p);
-
-
-
-
-
+            return View(pan); 
         }
+        [HttpPost]
+        //fait rentrer les donner en quelque sorte
+        //[Authorize] : exige l'authentification 
+        //c'est celui ci qui va faire fonctionner le bouton 
+        public async Task<IActionResult>  Details(PanierItem p  )
+        {
+
+            p.Count = 1;
+            p.Frais = 3;
+
+            var imagesCouleur = await _context.TirelireSet
+               .Where(t => t.Couleur == p.t.Couleur)
+               .Select(t => t.ImageUrlTirelire)
+               .ToListAsync();
+
+            // Passe les données des images de couleur à la vue
+            ViewBag.ImagesCouleur = imagesCouleur;
+
+
+            return View(p);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id , PanierItem p )
+        {
+            var pandelete = p.ToString(); 
+             // Redirigez vers la liste des objets après suppression
+             return View(pandelete);
+        }
+
         public IActionResult Admin()
 		{
 			return View();

@@ -6,13 +6,12 @@ namespace TirelireWebApp.Models.Panier
     //gerer la ligne panier
     public class Panier
     {
-        
-            public List<PanierItem> Items { get; set; } = new List<PanierItem>();
 
-            public void AjouterItem(PanierItem item)
-            {
-                Items.Add(item);
-            }
+        public List<PanierItem> Items { get; set; } = new List<PanierItem>();
+
+        public IEnumerable<PanierItem> ListPanier { get; set; }
+
+        public OrderTotal {get; set;}
        
 
         /* 

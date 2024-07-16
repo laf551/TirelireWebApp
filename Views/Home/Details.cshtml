@@ -1,19 +1,25 @@
-﻿@model TirelireWebApp.Models.Tirelire
+﻿@using TirelireWebApp.Models.Panier
+@* @model TirelireWebApp.Models.Tirelire      //@model Product *@
+@model PanierItem
 
-@{
+ @{
     ViewData["Title"] = "Details"; 
-}
-@{
-    ViewBag.Title = "Détails de la Tirelire";
-}
-<div class="container text-center ">
+    //Layout = null;
+} 
+
+<div class="container-fluid text-center ">
+
     <div class="row">
         <!-- debut colonne Gauche-->
-        <div class="col col-lg-4" >
+        <div class="col col-lg-3" >
+            <div class=" row">
+                
+                    <button type="button" class="col col-md-4 btn"  onclick="goBack()"> << Back </button>
+            </div>
             <div class="row">
                 <div class="d-flex justify-content-center text-block ">
-                    <img src="@Model.ImageUrlTirelire"
-                         style="width:30% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  cursor:pointer;"
+                    <img src="@Model.t.ImageUrlTirelire"
+                         style="width:80% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  cursor:pointer;"
                          id="productImage" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" />
 
                     <!-- Modal -->
@@ -21,11 +27,11 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">@Model.NameTirelire</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">@Model.t.NameTirelire</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="@Model.ImageUrlTirelire"
+                                    <img src="@Model.t.ImageUrlTirelire"
                                          style="width:100% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
 
                                 </div>
@@ -35,30 +41,60 @@
                     
                 </div>
                 </br>
+                
                 <div class="d-flex justify-content-center text-block">
-                    <h4 style=" color : yellowgreen ; margin: 5px ;"> @Model.NameTirelire </h4>
+                    </br>
+                    <h2 style=" color : yellowgreen ; margin: 5px ;"> @Model.t.NameTirelire </h2>
                 </div>
                 <div class="d-flex justify-content-center text-block" style=" color : yellowgreen">
-                    @Model.PriceTirelire.ToString("N2") € <!--0.00-->
+                    @Model.t.PriceTirelire.ToString("N2") € <!--0.00-->
                 </div>
                 </br>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex ">
 
-                    Détails :
+                    <table class="table table-borderless">
+                        <thead>
+                            
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hauteur</td>
+                                <td>  @Model.d.Hauteur cm</td>
+                            </tr>
+                             <tr>
+                                <td>Largeur </td>
+                                <td> @Model.d.Largeur cm</td>
+                             </tr> 
+                             <tr>
+                                <td>Longueur </td>
+                                <td> @Model.d.Longeur cm</td>
+                             </tr>
+                             <tr>
+                                <td>Poids </td>
+                                <td>  @Model.d.Poids kg</td>
+                             </tr>
+                             <tr>
+                                <td>Capacité </td>
+                                <td>  @Model.d.Capacité </td>
+                             </tr>
+                             <tr>
+                                <td>
+                                    Couleur
+                                    Principale
+                                </td>
+                                <td>  @Model.t.Couleur </td>
+                             </tr>
+                             <tr>
+                                <td>
+                                    Fabricant
+                                </td>
+                                <td>  @Model.d.Fabricant </td>
+                             </tr>
+                               
 
-                    <ul style=" list-style-type: none ; text-align : left">
-                        @foreach (var item in Model.DescriptionTirelire)
-                        {
-                            <li>Hauteur : @item.Detail.Hauteur cm</li>
-                            <li>Largeur : @item.Detail.Largeur cm</li>
-                            <li>Longueur : @item.Detail.Longeur cm</li>
-                            <li>Poids : @item.Detail.Poids kg</li>
-                            <li> Capacité : @item.Detail.Capacité  </li>
-                            <li> Couleur Principale : @Model.Couleur </li>
-                            <li>Fabricant :  @item.Detail.Fabricant </li>
-                        }
-                    </ul>
-                    
+                          
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
@@ -67,15 +103,16 @@
                 <!--ADD tirelire dans le panier-->
                 <div class="col">
                     <div class="mt-3 justify-content-center">
-                        <!-- ici -->
-                        <button type="button" class="btn" id="addTirelireBtn" style="background-color: forestgreen ; color : white ; margin-bottom: 30px ; width: 42%"
-                                asp-controller="Home" asp-action="Mod" asp-route-id="@Model">
-                            <i class="fa fa-plus" ></i>
-                        </button>
-                        <form  asp-action="CreateCheckout" methode="POST">
-                            <button asp-for="@Model.Id" type="submit" id="checkout-button" >Checkout</button> 
-                        </form>
+                       
                         <div>
+                            <!--AddPanier-->
+                           @*  <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Panier" asp-action="CreateCheckout" asp-route-id="@Model.Id" class="btn btn-primary mx-2"
+                                   style="background-color: forestgreen ; color : white ; margin-bottom: 30px ; width: 42%">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                               
+                            </div> *@
                            
                             
                         </div>
@@ -87,133 +124,267 @@
                 </div>
                 
             </div>
+            @*  <div class=" row">
+                <form method="post">
+                    <input hidden asp-for="IdTirelire" />
+                    <div>
+                     
+                    </div>
+                    <input asp-for="Count" type="number" value="1" class="form-control text-end" />
+                   @*  <div>
+                        <ul style=" list-style-type: none ; text-align : left">
+                            @foreach (var item in Model.d.DescriptionTirelire)
+                            {
+                                <li>Hauteur : @item.Detail.Hauteur cm</li>
+                                <li>Largeur : @item.Detail.Largeur cm</li>
+                                <li>Longueur : @item.Detail.Longeur cm</li>
+                                <li>Poids : @item.Detail.Poids kg</li>
+                                <li> Capacité : @item.Detail.Capacité  </li>
+                                <li> Couleur Principale : @Model.t.Couleur </li>
+                                <li>Fabricant :  @item.Detail.Fabricant </li>
+                            }
+                        </ul>
+                    </div> *@
+                   @*  <button type="submit"
+                            class="btn btn-primary bg-gradient w-100 py-2 text-uppercase fw-semibold">
+                        Add a Cart
+                    </button>
+                </form> *@
+                <!--test ici -->
+                
+           @*  </div> *@ 
 
-            <div class="row" style="border: 4mm ridge rgba(211, 220, 50, .6) ; margin-right : 10px; ">
-                <h3>Suggestion de tirelire couleur "@Model.Couleur"</h3>
-                <!-- Galerie pour les même couleurs-->
+            <div class="row">
+                <form asp-action="Details" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="IdTirelire" />
+                    <input type="hidden" asp-for="Count" />
+                    <input type="hidden" asp-for="t.Id" />
+                    <input type="hidden" asp-for="Frais" />
+                    <input type="hidden" asp-for="t.ImageUrlTirelire" />
+                    <input type="hidden" asp-for="t.NameTirelire" />
+                    <input type="hidden" asp-for="t.Couleur" />
+                    <input type="hidden" asp-for="t.PriceTirelire" />
+                     <input type="hidden" asp-for="d.Hauteur" />
+                    <input type="hidden" asp-for="d.Largeur" />
+                    <input type="hidden" asp-for="d.Longeur" />
+                    <input type="hidden" asp-for="d.Poids" />
+                    <input type="hidden" asp-for="d.Capacité" />
+                    <input type="hidden" asp-for="d.Fabricant" />
+                   
+                    
+                    
+
+                   
+
+                    @* <button type="submit">Ajouter au panier</button> *@
+                    <button type="submit" class="btn btn-primary mx-2"
+                            style="background-color: forestgreen ; color : white ; margin-bottom: 30px ; width: 69%">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </form>
+               @*  @if (Model.Count != 0 )
+                {
+                <table id="cart-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <h1>Détails de l'article</h1>
+
+                        <p>Id: @Model.Id</p>
+                        <p>IdTirelire: @Model.IdTirelire</p>
+                        <p>Count: @Model.Count</p>
+                        <p>tId: @Model.IdTirelire</p>
+                        <p>tImg:  
+                            <img src="@Model.t.ImageUrlTirelire"
+                                 style="width:100% ; border: solid 7px lightgrey;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+                        </p>
+
+                    </tbody>
+                </table> } *@
+
+
                
+                
+            </div>
+            <div class="row" style="border: 4mm ridge rgba(211, 220, 50, .6) ; margin-right : 10px; ">
+                <h3>Suggestion de tirelire "@Model.t.Couleur"         
+                </h3>
+                
+                <!-- Galerie pour les même couleurs-->
+                
                 @foreach (var imageUrl in ViewBag.ImagesCouleur)
                 {
-                    <div class="col"><img src="@imageUrl" alt="Tirelire Rouge" width="60%" /></div>
+                    <div class="col">
+                       <img src="@imageUrl" alt="Tirelire Rouge" width="60%"/>
+                    
+                    </div>
 
-                }
+                }  
                 
 
             </div>
         </div>
-        <!--Colonne pannier-->
-        <div class="col col-lg-8 Droite">
-            <div class="row" style="font-size:27px;color:forestgreen ; padding-top: 15px">
-                <div class="col col-md-10"></div>
-                <div class="col col-md-2">2<i class="fa fa-shopping-cart" ></i></div>
-                
-            </div>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tirelire</th>
-                            <th scope="col">Détail</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Qté</th>
-                            <th scope="col">Frais de Livraison</th>
-                            <th scope="col">Coût</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            
-                            <td>
-                                <img src="@Model.ImageUrlTirelire" style="width:70%;" />
-                                </td>
-                            <td>@Model.NameTirelire</td>
-                            <ul style=" list-style-type: none ; text-align : left">
-                                    @foreach (var item in Model.DescriptionTirelire)
-                                    {
-                                        <td>
-                                         h : @item.Detail.Hauteur ; l : @item.Detail.Largeur
-                                        L : @item.Detail.Longeur ; @item.Detail.Poids kg ; 
-                                @item.Detail.Capacité  </td>
-                                        
-                                       
-                                    }
-                            </ul>
-                            
-                            
-                            <td>@Model.PriceTirelire</td>
-                            <td>2</td>
-                            <td>3euros/kg</td>
-                            <td>12 euros</td>
-                            <td><button type="button" class="btn btn-primary" disabled>+</button></td>
-                            <td><button type="button" class="btn btn-primary" disabled>-</button></td>
-                            <td><button type="button" class="btn btn-danger" disabled><i class="fa fa-trash"></i></button></td>
-                            
-                        </tr>
-                       
-                        <tr style="border-top : solid 5px #21b121;">
-                            <td colspan="6"></td>
-                            
-                            <td style="">TOTAL</td>
-                            <td style="background-color: #21b121;" colspan="3"> 112,99euros</td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-           
-            
-            
-           @*  <div class="row">
-                <!-- Inclure la vue partielle pour ajouter au panier -->
-                <form asp-controller="Shared" asp-action="AddPanier" method="post">
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    <button type="submit" class="btn btn-primary">OK</button>
-                </form>
-                <button type="button" class="btn" id="addTirelireBtn" style="background-color: forestgreen ; color : white ; margin-bottom: 30px ; width: 42%"
-                        asp-controller="Home" asp-action="Details" asp-route-id="@Model.Id">
-                    <i class="fa fa-plus"></i>
-                </button>
 
-                <!-- Afficher le contenu du panier -->
-                @if (ViewBag.Panier != null && ViewBag.Panier.Pan.Count > 0)
-                {
-                    <h3>Contenu du Panier</h3>
-                    <ul>
-                        @foreach (var item in ViewBag.Panier.Pan)
-                        {
-                            <li>
-                                Panier ID: @item.IdPanier, Quantité: @item.Qte, Frais de Livraison: @item.FraisLivraison €
-                                <ul>
-                                    @foreach (var tirelire in item.TirelirePan)
-                                    {
-                                        <li>@tirelire.Nom - @tirelire.Prix €</li>
+        <!--Colonne pannier-->
+        <div class="col col-lg-9 Droite">
+            
+              
+
+            
+            <div class="row">
+                @if(@Model.Count!= 0){
+
+                <div class="row" style="font-size:27px;color:forestgreen ; padding-top: 15px">
+                    <div class="col col-md-10"></div>
+                    <div class="col col-md-2"> <span id="panier-@Model.t.Id"> 1 </span><i class="fa fa-shopping-cart"></i></div>
+
+                    </div>
+                <div class="col-md-2 offset-md-1">
+                    <!--ici -->
+                    <a asp-area="Customer"  asp-controller="Home" asp-action="Index" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
+                    <input />
+                </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tirelire</th>
+                                <th scope="col">h</th>
+                                <th scope="col">l</th>
+                                <th scope="col">L</th>
+                                <th scope="col">Poids</th>
+                                <th scope="col">P.U</th>
+                                <th scope="col">Qté</th>
+                                <th scope="col">Frais /kg</th>
+                                <th scope="col">Frais livraison</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                           
+                            <tr>
+
+                                <td> <img src="@Model.t.ImageUrlTirelire" style="width:70%;"/></td>
+                                <td>@Model.t.NameTirelire</td>
+                                <td>@Model.d.Hauteur cm</td>
+                                <td>@Model.d.Largeur cm</td>
+                                <td>@Model.d.Longeur cm</td>
+                                <td> @Model.d.Poids kg</td>
+                                @* <td> @Model.d.Capacité  </td> *@
+                                <td>@Model.t.PriceTirelire
+                                @{
+                                        double pu = (double)Model.t.PriceTirelire; 
+                                }
+                                </td>
+                                <td>
+                                    @* <span id=""> qte : @Model.Quantite</span> *@
+                                    <span id="count-@Model.t.Id"> @Model.Count</span>
+
+
+                                </td>
+                                <td>
+                                    
+                                    @* <span>@Model.Frais.ToString("C0")</span> *@
+                                    <span id="frais-@Model.t.Id">@Model.Frais</span>€
+                                </td>
+
+                                <td>
+                                    @{
+                                        double temp = (double)Model.d.Poids * (double)Model.Frais;
                                     }
-                                </ul>
-                                <ul>
-                                    @foreach (var description in item.DescriptionPan)
-                                    {
-                                        <li>@description.Detail</li>
+                                    @*  Frais de livraison = poids * frais * qté (par defaut : 1) *@
+                                    @{
+
+                                        double frais = (double)Model.d.Poids * (double)Model.Frais;
+                                        //double frais = (double)item.d.Poids * (double)item.Frais ;
                                     }
-                                </ul>
-                            </li>
-                        }
-                    </ul>
+                                      <span id="fraisLivraison-@Model.t.Id">@frais </span> € 
+                                    @* <!--Frais de livraison = poids * frais--> *@
+                                    @{
+                                       // <span id="frais-@Model.t.Id"> @Model.Frais </span>
+                                        //double frais = (double)@Model.d.Poids * (double)@Model.Frais;
+                                }
+
+                                @*  @frais.ToString("C0") *@
+
+                                </td>
+                                <td>
+                                    @* <!-- montant = frais de livraison +  prix --> *@
+
+                                    @{
+                                          double montant = (double)@frais + (double)@Model.t.PriceTirelire;
+                                    }
+                                    <span id="montant-@Model.t.Id">@montant.ToString("N2")</span>€
+
+
+
+
+                                </td>
+                                <td><button type="button" class="btn btn-primary" onclick="modifQte(@Model.t.Id, 1 , @temp ,@pu)">+</button></td>
+                                <td><button type="button" class="btn btn-primary" onclick="modifQte(@Model.t.Id, -1 , @temp, @pu )">-</button></td>
+                                <td><button type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i></button></td>
+                                
+                                @* <td>
+                                    <form asp-action="Supprimer" method="post">
+                                        <input type="hidden" name="index" value="@Model.Id" />
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                </td> *@
+
+
+
+
+                            </tr>
+                            <tr style="border-top : solid 5px #83d4ad ;">
+                                <td colspan="10"></td>
+
+                                <td style="">TOTAL</td>
+                                <td style="background-color:  #66b894;color : white ; font-size: 30px;  text-align:right ; border : solid  5px #83d4ad" colspan="3">
+                                    @*Montant total à payer *@
+
+                                    @{
+                                         double total = (double)@montant;
+                                    }
+                                    <span id="total-@Model.t.Id">@total.ToString("N2")</span>€
+
+                                </td>
+
+
+                            </tr>
+
+                            @*  } *@
+
+
+
+                        </tbody>
+                    </table>
                 }
                 else
                 {
-                    <p>Votre panier est vide.</p>
+
+                    <h3 class="alert alert-warning justify-content-center" >
+                        <strong>Warning!</strong>  Votre panier est vide!
+                    </h3>
                 }
-               
-            </div> *@
+
+            </div>
+           
+          
         </div>
        
 
    
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -225,6 +396,53 @@
         $('#photoModal #patientPhoto').attr('src', href);
         $('#photoModal').modal('show');
     });
+</script>
+<script>
+
+    function goBack() {
+        window.history.back();
+    }
+    
+    function modifQte(itemId, change, temp, pu) {
+        var countElement = document.getElementById('count-' +itemId);
+        var newQuantite = parseInt(countElement.innerText) + change;
+
+        var paniertElement = document.getElementById('panier-' + itemId);
+        var newPanier = parseInt(paniertElement.innerText) + change;
+
+        var fraisLivraisonElement = document.getElementById('fraisLivraison-' + itemId); 
+        var fraisLiv = parseFloat(fraisLivraisonElement.innerText.replace(',', '.')) + (change * temp);
+
+        //var montanttest = 
+
+        var montantElement = document.getElementById('montant-' + itemId);
+        var montant = parseFloat(montantElement.innerText.replace(',', '.')) + (change * temp) + (change * pu);
+
+        var totalElement = document.getElementById('total-' + itemId);
+        
+
+        
+
+
+
+        if (newQuantite > 0) {
+            countElement.innerText = newQuantite;
+            paniertElement.innerText = newPanier ; 
+            //remettre le virgule
+            fraisLivraisonElement.innerText = fraisLiv.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            montantElement.innerText = montant.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            totalElement.innerText = montant.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });;
+
+
+
+
+            //updateQuantiteOnPanier(itemId, newQuantite);
+        }
+
+    }
+
+
+
 </script>
        
 

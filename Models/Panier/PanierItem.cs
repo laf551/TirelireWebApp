@@ -6,13 +6,31 @@ namespace TirelireWebApp.Models.Panier
     public class PanierItem
     {
         public int Id { get; set; }
+
+        //public int IdDuTirelire { get ; set; }
         //public string Nom { get; set; }
         public int Quantite { get; set; }
         public decimal Frais { get; set; }
+
+        public int IdTirelire {get ; set; }
+       
+        public int Count { get; set; }
+       public Tirelire t { get; set; }
+       public DetailTirelire d { get; set; }
+
+        public void MettreAJour(int quantite, decimal frais, Tirelire tirelire, DetailTirelire detailTirelire)
+        {
+            this.Quantite = quantite;
+            this.Frais = frais;
+            this.t = tirelire;
+            this.d = detailTirelire;
         
-       // public Tirelire t { get; set; }
-        
-        
+        }
+
+        public void afficher(PanierItem p)
+        {
+            p.ToString(); 
+        }
         /* public int ID { get; set; }
          public int TirelireID { get; set; }
 

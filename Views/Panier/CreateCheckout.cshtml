@@ -1,0 +1,163 @@
+﻿@using TirelireWebApp.Models.Panier
+@using TirelireWebApp.Models
+
+
+@model List<PanierItem>
+<div> 
+    <button type="button" class="btn" onclick="goBack()"> << Back </button>
+</div>
+</br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tirelire</th>
+            <th scope="col">h</th>
+            <th scope="col">l</th>
+            <th scope="col">L</th>
+            <th scope="col">Poids</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Qté</th>
+            <th scope="col">Frais /kg</th>
+            <th scope="col">Frais livraison</th>
+            <th scope="col">Montant</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+       
+            @foreach (var item in Model)
+            {
+            <tr>
+               
+                <td><img src="@item.t.ImageUrlTirelire" width="50" height="50" /></td>
+                <td>@item.t.NameTirelire</td>
+
+                <td>@item.d.Hauteur cm</td>
+                <td>@item.d.Largeur cm</td>
+                <td>@item.d.Longeur cm</td>
+                <td> @item.d.Poids kg</td>
+                <td>@item.t.PriceTirelire</td>
+                <td>
+                    <span id="quantite-@item.t.Id">@item.Quantite</span>
+                   
+                       
+                </td>
+                <td>
+                       @*  @item.Frais.ToString("C0") *@
+                    <span>@item.Frais.ToString("C0")</span>
+                    @* <span id="frais-@item.t.Id">@item.Frais</span> *@
+                </td>
+                
+                <td>
+                    @*  Frais de livraison = poids * frais * qté (par defaut : 1) *@
+                    @{
+                       
+                        double frais = (double)item.d.Poids * (double)item.Frais ;
+                        //double frais = (double)item.d.Poids * (double)item.Frais ;
+                    }
+                    <span id="fraisLivraison-@item.t.Id">@frais </span> €
+                    @* <!--Frais de livraison = poids * frais--> *@
+                       @*  @{
+                        <span id="frais-@item.t.Id"> ici ::: @item.Frais </span>
+                            double frais = (double)@item.d.Poids * (double)@item.Frais;
+                        }
+                   
+                       @*  @frais.ToString("C0") *@
+                
+                    </td>
+                <td>
+                    @* <!-- montant = frais de livraison +  prix --> *@
+                   
+                        @{
+                            double montant = (double)@frais + (double)@item.t.PriceTirelire;
+                        }
+                    <span id="montant-@item.t.Id">@montant.ToString("C")</span> €
+                     @* @montant.ToString("C") *@
+                  @*   <span id="montant-@item.t.Id">@montant.ToString("C")</span> *@
+                        
+
+                </td>
+                <td><button type="button" class="btn btn-primary" onclick="modifQte(@item.t.Id, 1)">+</button></td>
+                <td><button type="button" class="btn btn-primary" onclick="modifQte(@item.t.Id, -1)" >-</button></td>
+                @* <td><button type="button" class="btn btn-danger" asp-action="Supprimer" asp-route-id="@item.Id"><i class="fa fa-trash"></i></button></td> *@
+                <td><form asp-action="Supprimer" method="post">
+                    <input type="hidden" name="index" value="@item.Id" />
+                    <button type="submit">Supprimer</button>
+                </form> </td>
+
+
+
+
+            </tr>
+            <tr style="border-top : solid 5px #21b121;">
+                <td colspan="10"></td>
+
+                <td style="">TOTAL</td>
+                <td style="background-color: #21b121; text-align:right" colspan="3">
+                    @*Montant total à payer *@
+                       
+                    @{
+                            double total = (double)@montant;
+                     }
+                    <span id="total-@item.t.Id">@total.ToString("c")</span> €
+                       
+                </td>
+
+
+            </tr>
+
+            }
+      
+      
+     
+     </tbody>
+</table>
+<script>
+    
+    function goBack() {
+        window.history.back();
+    }
+fraisFixe
+    function modifQte(itemId, change ) {
+        var quantiteElement = document.getElementById('quantite-' + itemId);
+        var newQuantite = parseInt(quantiteElement.innerText) + change;
+
+        
+
+        var fraisLivraisonElement = document.getElementById('fraisLivraison-' + itemId);
+
+        //var fraisLiv = parseFloat(fraisLivraisonElement.innerText.replace(',', '.') + 1 ;
+       
+        var fraisLiv = parseFloat(fraisLivraisonElement.innerText.replace(',', '.')) + (change * parseFloat(fraisLivraisonElement.innerText.replace(',', '.'))) ;
+        //var fraisLiv = parseFloat(fraisLivraisonElement.innerText.replace(',', '.') + fraisFixe ; 
+
+        var montantElement = document.getElementById('montant-' + itemId);
+        var montant = parseFloat(montantElement.innerText) * change   ;
+
+        var totalElement = document.getElementById('total-' + itemId);
+        var total = parseFloat(totalElement.innerText) * change ;
+
+
+
+        if (newQuantite >= 0) {
+            quantiteElement.innerText = newQuantite;
+            fraisLivraisonElement.innerText = fraisLiv;
+            montantElement.innerText = montant + montant;
+            totalElement.innerText = total + total;
+
+
+
+           
+            //updateQuantiteOnPanier(itemId, newQuantite);
+        }
+
+    }
+
+
+
+</script>
+
+

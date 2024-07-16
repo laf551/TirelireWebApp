@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TirelireWebApp.Models
 {
@@ -16,7 +17,10 @@ namespace TirelireWebApp.Models
         public string Couleur { get; set; }
         
         //DetailsArticle 
-      
+       /* public int FabricantId { get; set; }
+        [ForeignKey("FabricantId")]
+        public Fabricant Fabricant { get; set; }*/
+
         public List <Description> DescriptionTirelire { get ; set; }
 
         
