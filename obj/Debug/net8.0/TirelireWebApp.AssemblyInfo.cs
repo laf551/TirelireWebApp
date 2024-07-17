@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TirelireWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ff54c8df482f573e1f84f45b062e0a81be3da73")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+630288186c40fa563515fb038b86b598d99a6faa")]
 [assembly: System.Reflection.AssemblyProductAttribute("TirelireWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TirelireWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

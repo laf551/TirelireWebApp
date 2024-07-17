@@ -13,6 +13,8 @@ namespace TirelireWebApp.Controllers
     {
         private readonly TirelireContext _context;
 
+        public Panier MonGrandPanier { get; set; }
+
         
 
         public PanierController( TirelireContext context)

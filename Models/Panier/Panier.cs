@@ -11,7 +11,7 @@ namespace TirelireWebApp.Models.Panier
 
         public IEnumerable<PanierItem> ListPanier { get; set; }
 
-        public OrderTotal {get; set;}
+        public double OrderTotal {get; set;}
        
 
         /* 

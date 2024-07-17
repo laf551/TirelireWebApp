@@ -9,6 +9,7 @@ using TirelireWebApp.Data;
 using TirelireWebApp.Models;
 using TirelireWebApp.Models.Panier;
 using Microsoft.AspNetCore.Authorization;
+using Azure.Messaging;
 
 
 
@@ -24,6 +25,7 @@ namespace TirelireWebApp.Controllers
 		private readonly ILogger<HomeController> _logger;
 
         private readonly TirelireContext _context;
+        private static List<PanierItem> _panierItems = new List<PanierItem>();
         public HomeController(ILogger<HomeController> logger , TirelireContext context)
 		{
 			//constructeur
@@ -101,10 +103,7 @@ namespace TirelireWebApp.Controllers
 
 
             //return new JsonResult(p);
-            List<PanierItem> MaListe = new List<PanierItem>
-            {
-
-            };
+            
             PanierItem pan = new()
             {
                 t = tirelire,
@@ -114,6 +113,9 @@ namespace TirelireWebApp.Controllers
 
 
             };
+            
+            // Ajouter l'objet à la liste temporaire
+            _panierItems.Add(pan);
 
             return View(pan); 
         }
@@ -147,12 +149,37 @@ namespace TirelireWebApp.Controllers
              return View(pandelete);
         }
 
+        [HttpPost]
+        public IActionResult DeletePanierItem(int IdTirelire)
+        {
+            //PanierItem obj = _panierItems.Find(); 
+            
+            var itemToRemove = _panierItems.FirstOrDefault(p => p.IdTirelire == IdTirelire);
+            if (itemToRemove != null)
+            {
+                _panierItems.Remove(itemToRemove);
+
+            }
+           
+           return RedirectToAction("Details", new { id = IdTirelire }); // Redirigez vers la page appropriée après suppression; 
+        }
+
+
         public IActionResult Admin()
 		{
 			return View();
+		} 
+        public IActionResult Login()
+		{
+			return View();
 		}
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

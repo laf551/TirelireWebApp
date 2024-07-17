@@ -2,7 +2,11 @@
     font-family: "Sofia", sans-serif;
     font-size: 20px;
     margin-bottom: 60px;
+    background-color :#a5d8c7 ; 
+
 }
+
+
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -70,4 +74,19 @@
     padding: 0;
     background-color: yellowgreen;
     color: white; 
+}
+
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
+
+.transparent-card {
+    background-color: rgba(255, 255, 255, 0.8); /* Couleur blanche avec 80% d'opacité */
+    border-radius: 25px;
+}
+
+.transparent-card-body {
+    background-color: rgba(255, 255, 255, 0.6); /* Couleur blanche avec 60% d'opacité */
 }

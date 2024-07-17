@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\css\\style2.css",
+      "PackagePath": "staticwebassets\\css\\style2.css"
+    },
+    {
       "Id": "C:\\Users\\Laf\\source\\repos\\TirelireWebApp\\TirelireWebApp\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

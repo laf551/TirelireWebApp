@@ -13,7 +13,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        @* <div style=" background:  #1fa67a" type=" hidden"> MyWebApp</div> *@
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="border: solid #1fa67a 144px; " >
             <div class="container-fluid ">
                 <ul class="navbar-nav  ici flex-grow-1" style="font-size : larger">
                     <li class="nav-item row">
@@ -22,7 +23,7 @@
                         
                     </li>
                     
-
+                    @* border: solid #1fa67a 144px; *@
                    
                 </ul>
                 <!-- rechercher -->
@@ -47,31 +48,36 @@
                 </button>
                 <div >
                     <!-- <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> -->
-                    <ul class="navbar-nav flex-grow-1 " style="float : right; font-size : larger">
+                    <ul class="navbar-nav flex-grow-1 " style=" font-size : larger">
                         
                         <li class="nav-item" >
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" > <span class="fa fa-home"></span></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Home <span class="fa fa-home" style="color : #1fa67a"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login <i class="fa fa-user" style="color : #1fa67a" aria-hidden="true"></i></a>
                             
                         </li>
                         <!-- Client Menu-->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Client">Client</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register <i class="fa fa-user-plus" style="color : #1fa67a" aria-hidden="true"></i></a>
                         </li>
                         <!-- Admin Menu-->
-                        <li class="nav-item">
+                       @*  <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
+                        </li> *@
+
+                        <li class="nav-item ">
+                            @* <button type="button" class="  dropdown-toggle" data-bs-toggle="dropdown">Rôle</button>  *@
+                            <a type="button" class=" nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown">Rôle</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Client</a></li>
+                                <li><a class="dropdown-item" href="#">Admin </a></li>
+                                <li><a class="dropdown-item" href="#">Moderateur </a></li>
+                                <li><a class="dropdown-item" href="#">Assistant </a></li>
+                            </ul>
                         </li>
                         <!-- Mod Menu-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Details">Moderateur</a>
-                        </li>
-                        <!-- Assist Menu-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=" " asp-controller=" Home" asp-action="Details" >Assistant</a>
-                        </li>
+                       
                     </ul>
                 </div>
             </div>

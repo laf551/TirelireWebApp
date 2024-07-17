@@ -18,19 +18,8 @@ namespace TirelireWebApp.Models.Panier
        public Tirelire t { get; set; }
        public DetailTirelire d { get; set; }
 
-        public void MettreAJour(int quantite, decimal frais, Tirelire tirelire, DetailTirelire detailTirelire)
-        {
-            this.Quantite = quantite;
-            this.Frais = frais;
-            this.t = tirelire;
-            this.d = detailTirelire;
+       
         
-        }
-
-        public void afficher(PanierItem p)
-        {
-            p.ToString(); 
-        }
         /* public int ID { get; set; }
          public int TirelireID { get; set; }
 
