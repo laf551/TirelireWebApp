@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TirelireWebApp.Models;
 namespace TirelireWebApp.Data
 {
-    public class TirelireContext : DbContext
+    public class TirelireContext : IdentityDbContext<IdentityUser>
     {
         //config via le constructeur : 
         public TirelireContext(DbContextOptions<TirelireContext> options) : base(options)
@@ -94,5 +96,6 @@ namespace TirelireWebApp.Data
         public DbSet<Tirelire> TirelireSet { get; set; }
         public DbSet<DetailTirelire> DetailTireliresSet { get; set; }
         public DbSet<Description> DescriptionSet { get; set; }
+        public  DbSet<ApplicationUser> applicationUsers { get; set;  }
     }
 }

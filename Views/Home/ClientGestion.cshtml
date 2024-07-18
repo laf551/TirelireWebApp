@@ -1,0 +1,26 @@
+﻿<div class="alert alert-danger text-center text-dark " role="alert" ">
+    Attention l'espace est réservé uniquement aux Responsables  !
+    <h1> Gestions des Clients </h1>
+</div>
+<form method="post">
+    <fieldset>
+        <legend>Gestion Client </legend>
+        <p>
+            <label for="title">Name Client:</label>
+            <input type="text" name="title" value="" />
+           @*  <input type="text" name="title" value="@Request.Form["title"]" /> *@
+        </p>
+
+        <p>
+            <label for="genre">Email Clien:</label>
+            <input type="text" name="genre" value="" />
+        </p>
+
+        <p>
+            <label for="year">Age:</label>
+            <input type="text" name="year" value="" />
+        </p>
+
+        <p><input type="submit" name="buttonSubmit" value="Creer" /></p>
+    </fieldset>
+</form>

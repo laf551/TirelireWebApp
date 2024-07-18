@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using TirelireWebApp.Models
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,75 +15,58 @@
 <body>
     <header>
         @* <div style=" background:  #1fa67a" type=" hidden"> MyWebApp</div> *@
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="border: solid #1fa67a 144px; " >
-            <div class="container-fluid ">
-                <ul class="navbar-nav  ici flex-grow-1" style="font-size : larger">
-                    <li class="nav-item row">
-                        <a class="navbar-brand col " asp-area="" asp-controller="Home" asp-action="Index" style="font-size : larger"><img src="~/Logo5.png" alt="Logo" style="height: 50px; max-width: 100%; object-fit: contain;" /></a>
-                        <a class="navbar-brand col " asp-area="" asp-controller="Home" asp-action="Index" style="font-size : larger ; margin-top : 16px; margin-left: -36px;"> <h3>TirelireWebApp</h3> </a>
-                        
-                    </li>
-                    
-                    @* border: solid #1fa67a 144px; *@
-                   
-                </ul>
-                <!-- rechercher -->
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="border-top: solid #1fa67a 12px; margin: auto ; width: 93%; 
+border-top: solid #1fa67a 5px ; border-radius: 75px; margin-top: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Logo5.png" alt="Logo" style="height: 50px; max-width: 100%; object-fit: contain;" />
+                    <h3 style="margin-left: 10px;">TirelireWebApp</h3>
+                </a>
 
-                        <li class="nav-item " style=" margin: auto ; ">
-                            <form asp-controller="Home" asp-action="Index" method="get">
-                                <input style="width: 80% ; float : left ;  border-top-left-radius : 20px; border-radius:20px ;
-                                    background : transparent" type="text" name="SearchString" class="form-control" />
-                                <button style=" width : 20% ; float: left ; border : none ; background : transparent ; height : 40px"
-                                        type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div >
-                    <!-- <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> -->
-                    <ul class="navbar-nav flex-grow-1 " style=" font-size : larger">
-                        
-                        <li class="nav-item" >
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Home <span class="fa fa-home" style="color : #1fa67a"></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login <i class="fa fa-user" style="color : #1fa67a" aria-hidden="true"></i></a>
-                            
-                        </li>
-                        <!-- Client Menu-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register <i class="fa fa-user-plus" style="color : #1fa67a" aria-hidden="true"></i></a>
-                        </li>
-                        <!-- Admin Menu-->
-                       @*  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
-                        </li> *@
 
-                        <li class="nav-item ">
-                            @* <button type="button" class="  dropdown-toggle" data-bs-toggle="dropdown">Rôle</button>  *@
-                            <a type="button" class=" nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown">Rôle</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Client</a></li>
-                                <li><a class="dropdown-item" href="#">Admin </a></li>
-                                <li><a class="dropdown-item" href="#">Moderateur </a></li>
-                                <li><a class="dropdown-item" href="#">Assistant </a></li>
-                            </ul>
-                        </li>
-                        <!-- Mod Menu-->
-                       
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Search Form -->
+                    <form class="d-flex mx-auto my-2" asp-controller="Home" asp-action="Index" method="get" style="max-width: 300px;">
+                        <input class="form-control me-2" type="search" name="SearchString" placeholder="Search" aria-label="Search" style="border-radius: 20px ; width : auto ;background: transparent;">
+                        <button class="btn" type="submit" style="border-radius: 0 20px 20px 0; background: transparent; border: none; width : 100%;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+
+                   
+                   
+
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="font-size: larger;">
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home <span class="fa fa-home" style="color: #1fa67a;"></span></a>
+                            </li>
+                        @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Moderateur) || User.IsInRole(SD.Role_Assistant))
+                            {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="roleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gestion</a>
+                                <ul class="dropdown-menu" aria-labelledby="roleDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AvisGestion" >Moderer les avis</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ClientGestion" >Gerer les clients</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AvisGestion" > Gerer les avis</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+
+                                </ul>
+                            </li>
+                            }
+                        </ul>
+                   
+                    
+
+
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -90,8 +74,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="text-center">
-            &copy; 2024 - TirelireWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="text-center" style="font-size: large ; ">
+            App Web <i class="fa fa-heart"></i>  Lafatra  <i class="fa fa-heart "></i>   2024 - TirelireWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

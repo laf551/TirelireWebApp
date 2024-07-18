@@ -164,11 +164,21 @@ namespace TirelireWebApp.Controllers
            return RedirectToAction("Details", new { id = IdTirelire }); // Redirigez vers la page appropriée après suppression; 
         }
 
+        //Equipe de vente
 
-        public IActionResult Admin()
+        [Authorize]
+        public IActionResult AvisGestion()
 		{
 			return View();
-		} 
+		}
+        
+        /*[Area("Admin")]*/
+        [Authorize(Roles=SD.Role_Admin)]
+        public IActionResult ClientGestion()
+            //seul Admin et moderateur 
+        {
+            return View();
+        }
         public IActionResult Login()
 		{
 			return View();
